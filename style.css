@@ -45,6 +45,10 @@ header {
   display: none;
 }
 
+.close-btn {
+  display: none;
+}
+
 .logo {
   text-align: center;
   grid-area: logo;
@@ -83,25 +87,37 @@ footer {
     grid-template-areas: 'toggle-btn logo .';
   }
 
-  .toggle-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  i {
     cursor: pointer;
+  }
+
+  .toggle-btn,
+  .close-btn {
+    display: flex;
+    align-items: center;
     font-size: 1.5rem;
+  }
+
+  .toggle-btn {
     grid-area: toggle-btn;
+    justify-content: center;
+  }
+
+  .close-btn {
+    justify-content: flex-end;
+    margin: 1rem;
   }
 
   section {
     grid-area: unset;
     position: absolute;
-    top: 5%;
+    top: 0;
     bottom: 0;
     right: 30%;
     left: 0;
     transform: translateX(-100%);
     opacity: 0;
-    transition: all 0.5s;
+    transition: all 0.2s;
   }
 }
 

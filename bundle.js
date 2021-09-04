@@ -15,7 +15,7 @@
   \**********************/
 /***/ (() => {
 
-eval("const sideBar = document.querySelector('section');\nconst btnMenu = document.querySelector('.toggle-btn');\n\nbtnMenu.addEventListener('click', () => {\n  sideBar.classList.toggle('slide');\n});\n\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
+eval("const sideBar = document.querySelector('section');\nconst btnMenu = document.querySelectorAll('i');\n\nbtnMenu.forEach((btn) => {\n  btn.addEventListener('click', () => {\n    sideBar.classList.toggle('slide');\n  });\n});\n\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
 
 /***/ })
 
