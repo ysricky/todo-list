@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
 :root {
-  --primary: #3bd6c6;
-  --secondary: #40e0d0;
+  --primary: #40e0d0;
+  --secondary: #3bd6c6;
   --tertiary: #b3ecec;
   --font: #001a1a;
 }
@@ -17,7 +17,95 @@
 
 body {
   min-height: 100vh;
-  background-color: var(--tertiary);
   font-family: 'VT323', monospace;
   color: var(--font);
+}
+
+#content-container {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 0.3fr 0.7fr;
+  grid-template-rows: min-content auto min-content;
+  grid-template-areas:
+    'header header'
+    'menu-content main'
+    'footer footer';
+}
+
+/* header */
+header {
+  grid-area: header;
+  background-color: var(--primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.toggle-btn {
+  display: none;
+}
+
+.logo {
+  text-align: center;
+  grid-area: logo;
+}
+/* end of header */
+
+section {
+  grid-area: menu-content;
+  background-color: var(--secondary);
+}
+
+main {
+  grid-area: main;
+  background-color: var(--tertiary);
+}
+
+footer {
+  grid-area: footer;
+  background-color: var(--primary);
+}
+
+@media screen and (max-width: 576px) {
+  #content-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content auto min-content;
+    grid-template-areas:
+      'header'
+      'main'
+      'footer';
+  }
+
+  header {
+    display: grid;
+    grid-template-columns: 0.2fr 0.6fr 0.2fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: 'toggle-btn logo .';
+  }
+
+  .toggle-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.5rem;
+    grid-area: toggle-btn;
+  }
+
+  section {
+    grid-area: unset;
+    position: absolute;
+    top: 5%;
+    bottom: 0;
+    right: 30%;
+    left: 0;
+    transform: translateX(-100%);
+    opacity: 0;
+    transition: all 0.5s;
+  }
+}
+
+.slide {
+  transform: translateX(0%);
+  opacity: 1;
 }
