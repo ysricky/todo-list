@@ -1,6 +1,8 @@
 const sideBar = document.querySelector('section');
-const btnMenu = document.querySelector('.toggle-btn');
+const btnMenu = document.querySelectorAll('i');
 
-btnMenu.addEventListener('click', () => {
-  sideBar.classList.toggle('slide');
+btnMenu.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    sideBar.classList.toggle('slide');
+  });
 });
