@@ -25,7 +25,7 @@ body {
 #content-container {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 0.3fr 0.7fr;
+  grid-template-columns: 0.2fr 0.8fr;
   grid-template-rows: min-content auto min-content;
   grid-template-areas:
     'header header'
@@ -74,6 +74,10 @@ section {
   background-color: aliceblue;
 }
 
+.project-header {
+  margin-left: 1rem;
+}
+
 main {
   grid-area: main;
   background-color: var(--tertiary);
@@ -88,6 +92,15 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 1.5rem;
+}
+
+a {
+  color: var(--font);
+}
+
+input[type='checkbox']:checked + label.strikethrough {
+  text-decoration: line-through;
 }
 
 @media screen and (max-width: 768px) {
@@ -111,7 +124,7 @@ footer {
     font-size: 1.5rem;
   }
 
-  i {
+  span {
     cursor: pointer;
   }
 

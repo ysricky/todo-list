@@ -1,5 +1,5 @@
 const sideBar = document.querySelector('section');
-const btnMenu = document.querySelectorAll('i');
+const btnMenu = document.querySelectorAll('span');
 
 btnMenu.forEach((btn) => {
   btn.addEventListener('click', () => {
