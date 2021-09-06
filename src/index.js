@@ -1,8 +1,4 @@
-const sideBar = document.querySelector('section');
-const btnMenu = document.querySelectorAll('span');
+import { closeMenu, addNewProject } from './modules/render';
 
-btnMenu.forEach((btn) => {
-  btn.addEventListener('click', () => {
-    sideBar.classList.toggle('slide');
-  });
-});
+closeMenu();
+addNewProject();

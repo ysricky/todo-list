@@ -5,7 +5,7 @@
   --secondary: #3bd6c6;
   --tertiary: #b3ecec;
   --font: #001a1a;
-  font-size: 20px;
+  font-size: 12px;
 }
 
 *,
@@ -43,12 +43,14 @@ header {
   align-items: center;
 }
 
-.toggle-btn {
+.toggle-btn,
+.close-btn {
   display: none;
 }
 
 .close-btn {
-  display: none;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid black;
 }
 
 .logo {
@@ -64,31 +66,39 @@ section {
   padding: 1rem;
 }
 
-.control-menu p {
-  margin-left: 1.5rem;
-  margin-top: 1rem;
+.btn-new-project {
   cursor: pointer;
 }
 
-.control-menu p:hover {
-  background-color: aliceblue;
-}
-
-.project-header {
-  margin-left: 1rem;
+.projects {
+  display: flex;
+  margin: 1rem;
+  justify-content: space-between;
+  align-items: center;
 }
 
 main {
   grid-area: main;
   background-color: var(--tertiary);
   padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.todos {
+  height: 100px;
+  width: 100px;
+  background-color: var(--primary);
+  margin: 1rem;
+  padding: 0.5rem;
+  border-radius: 15px;
 }
 
 footer {
   grid-area: footer;
   background-color: var(--primary);
   height: 3rem;
-  padding: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -99,8 +109,12 @@ a {
   color: var(--font);
 }
 
-input[type='checkbox']:checked + label.strikethrough {
+input[type='checkbox']:checked + .task-done {
   text-decoration: line-through;
+}
+
+.hide {
+  display: none;
 }
 
 @media screen and (max-width: 768px) {
