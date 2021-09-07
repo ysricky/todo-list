@@ -9,18 +9,16 @@ const closeMenu = () => {
   });
 };
 
-const addNewProject = () => {
-  const btnAddNewProject = document.querySelector('.btn-new-project');
-  const formNewProject = document.querySelector('.form-new-project');
-  const btnOk = document.querySelector('.ok');
+const btnAddNewProject = document.querySelector('.btn-new-project');
+const formNewProject = document.querySelector('.form-new-project');
+const btnOk = document.querySelector('.ok');
 
-  const hideController = () => {
-    btnAddNewProject.classList.toggle('hide');
-    formNewProject.classList.toggle('hide');
-  };
-
-  btnAddNewProject.addEventListener('click', hideController);
-  btnOk.addEventListener('click', hideController);
+const hideController = () => {
+  btnAddNewProject.classList.toggle('hide');
+  formNewProject.classList.toggle('hide');
 };
 
-export { closeMenu, addNewProject };
+btnAddNewProject.addEventListener('click', hideController);
+btnOk.addEventListener('click', hideController);
+
+export { closeMenu };

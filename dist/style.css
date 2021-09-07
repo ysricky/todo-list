@@ -77,6 +77,22 @@ section {
   align-items: center;
 }
 
+.form-new-project {
+  display: flex;
+  flex-direction: column;
+}
+
+.confirm-project {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.ok,
+.cancel {
+  cursor: pointer;
+}
+
 main {
   grid-area: main;
   background-color: var(--tertiary);
@@ -107,10 +123,6 @@ footer {
 
 a {
   color: var(--font);
-}
-
-input[type='checkbox']:checked + .task-done {
-  text-decoration: line-through;
 }
 
 .hide {

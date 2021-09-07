@@ -1,4 +1,3 @@
-import { closeMenu, addNewProject } from './modules/render';
+import { closeMenu } from './modules/render';
 
 closeMenu();
-addNewProject();
