@@ -1,3 +1,3 @@
-import { closeMenu } from './modules/render';
+import { closeMenu } from './modules/displayController';
 
 closeMenu();
