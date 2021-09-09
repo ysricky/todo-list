@@ -72,8 +72,9 @@ section {
 
 .projects {
   display: flex;
+  flex-direction: column;
   margin: 1rem;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 
@@ -129,6 +130,7 @@ a {
   display: none;
 }
 
+/* media queries */
 @media screen and (max-width: 768px) {
   #content-container {
     grid-template-columns: 1fr;
