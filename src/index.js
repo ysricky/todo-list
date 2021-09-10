@@ -1,3 +1,6 @@
-import { closeMenu } from './modules/displayController';
-
-closeMenu();
+import {
+  btnAddNewProject,
+  btnConfirmNewProject,
+  btnAddTodos,
+  btnConfirmNewTodo,
+} from './modules/displayController';

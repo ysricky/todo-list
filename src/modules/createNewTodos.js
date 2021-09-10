@@ -1,29 +1,30 @@
 import { toDate, isToday, isThisWeek } from 'date-fns';
 
+//, description, dueDate, priority, checklist = false
 class Todos {
-  constructor(title, description, dueDate, priority, checklist = false) {
+  constructor(title) {
     this.title = title;
-    this.description = description;
-    this.dueDate = dueDate;
-    this.priority = priority;
-    this.checklist = checklist;
+    // this.description = description;
+    // this.dueDate = dueDate;
+    // this.priority = priority;
+    // this.checklist = checklist;
   }
 
-  setTitle(newTitle) {
-    this.title = newTitle;
-  }
+  // setTitle(newTitle) {
+  //   this.title = newTitle;
+  // }
 
-  getTitle() {
-    return this.title;
-  }
+  // getTitle() {
+  //   return this.title;
+  // }
 
-  setDescription(newDescription) {
-    this.description = newDescription;
-  }
+  // setDescription(newDescription) {
+  //   this.description = newDescription;
+  // }
 
-  getDescription() {
-    return this.description;
-  }
+  // getDescription() {
+  //   return this.description;
+  // }
 }
 
 export default Todos;
