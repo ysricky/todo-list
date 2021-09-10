@@ -17,7 +17,7 @@
     <div id="content-container">
         <!-- header section -->
         <header>
-            <div class="toggle-btn">
+            <div class="toggle-menu-btn">
                 <span class="fas fa-bars"></span>
             </div>
             <div class="logo">
@@ -28,26 +28,23 @@
 
         <!-- menu section -->
         <section>
-            <div class="close-btn">
+            <div class="close-menu-btn">
                 <span class="fas fa-times"></span>
             </div>
             <div class="control-menu">
                 <h2><i class="fas fa-calendar-day"></i> Today</h2>
                 <h2><i class="fas fa-calendar-week"></i> This Week</h2>
-                <h2 class="project-header">Projects</h2>
-                <div class="projects">
-                    <p><i class="fas fa-tasks"></i> Todo 1</p>
-                    <i class="fas fa-times-circle"></i>
-                </div>
+                <h2 class="project-header">Projects:</h2>
+                <div class="projects"></div>
                 <div class="btn-new-project">
                     <p><i class="fas fa-plus-circle"></i> Add New Project</p>
                 </div>
                 <div class="form-new-project hide">
-                    <form action="">
+                    <form class="project-input">
                         <input type="text" class="project-text-input">
                         <div class="confirm-project">
-                            <div class="ok">Ok</div>
-                            <div class="cancel">Cancel</div>
+                            <div class="confirm-new-project">Ok</div>
+                            <div class="cancel-new-project">Cancel</div>
                         </div>
                     </form>
                 </div>
@@ -57,10 +54,17 @@
 
         <!-- main section -->
         <main>
-            <div class="todos">
-                <input type="checkbox" id="todo" />
-                <label for="todo" class="task-done">Things to do</label>
+            <div class="addTodos"><i class="fas fa-plus"></i></div>
+            <div class="form-new-todo hide">
+                <form class="todos-input">
+                    <input type="text" class="todo-text-input">
+                    <div class="confirm-todo">
+                        <div class="confirm-new-todo">Ok</div>
+                        <div class="cancle-new-todo">Cancel</div>
+                    </div>
+                </form>
             </div>
+            <div class="todosDiv"></div>
         </main>
         <!-- end of main -->
 
