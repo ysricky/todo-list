@@ -1,7 +1,7 @@
-import myProjects from './storageProvider';
+import projectsArray from './storageProvider';
 import Project from './createNewProject';
-import Todos from './createNewTodos';
-import { add } from 'date-fns';
+import Todo from './createNewTodo';
+import { add, isToday, isThisWeek } from 'date-fns';
 
 const sideBar = document.querySelector('section');
 const btnMenu = document.querySelectorAll('span');
@@ -11,7 +11,6 @@ const btnAddNewProject = document.querySelector('.btn-new-project');
 const btnConfirmNewProject = document.querySelector('.confirm-new-project');
 const projectsDiv = document.querySelector('.projects');
 const projectInputField = document.querySelector('.project-text-input');
-const mainPage = document.querySelector('main');
 const btnAddTodos = document.querySelector('.addTodos');
 const todosDiv = document.querySelector('.todosDiv');
 const formNewTodo = document.querySelector('.form-new-todo');
@@ -25,7 +24,7 @@ let activeProject = '';
 // project list functionality
 const addNewProject = () => {
   const newProject = new Project(projectInputField.value);
-  myProjects.push(newProject);
+  projectsArray.push(newProject);
 };
 
 const removeProjects = () => {
@@ -33,19 +32,20 @@ const removeProjects = () => {
 };
 
 const renderProjects = () => {
-  let i = 0;
-  myProjects.forEach((project) => {
+  let projectIndex = 0;
+  projectsArray.forEach((project) => {
     const newProjectDiv = document.createElement('div');
     newProjectDiv.classList.add('added-project');
-    newProjectDiv.dataset.projectId = `${i}`;
+    newProjectDiv.dataset.projectId = `${projectIndex}`;
     newProjectDiv.innerHTML = `<i class="fas fa-tasks"></i><div>${project.name}</div><i class="fas fa-times-circle"></i>`;
     newProjectDiv.addEventListener('click', () => {
       renderTodos(project);
     });
     projectsDiv.append(newProjectDiv);
-    i++;
+    renderTodos(project);
+    projectIndex++;
   });
-  console.log(myProjects);
+  console.log(projectsArray);
 };
 
 const hideProjectMenuBtn = () => {
@@ -55,8 +55,8 @@ const hideProjectMenuBtn = () => {
 
 // todo list functionality
 const addNewTodo = () => {
-  const newTodo = new Todos(todoInputField.value);
-  myProjects.forEach((project) => {
+  const newTodo = new Todo(todoInputField.value);
+  projectsArray.forEach((project) => {
     if (project.name === activeProject) {
       project.addTodo(newTodo);
     }
@@ -89,6 +89,21 @@ const hideTodoMenuBtn = () => {
   formNewTodo.classList.toggle('hide');
 };
 
+const renderTodoList = () => {
+  const divForProjectTodos = document.createElement('div');
+  projectsArray.forEach((project) => {
+    console.log(project.todos);
+    if (project.title === activeProject) {
+      project.todos.forEach((todo) => {
+        const todoDiv = document.createElement('div');
+        todoDiv.innerHTML = todo.title;
+        divForProjectTodos.append(todoDiv);
+      });
+    }
+  });
+  todosDiv.append(divForProjectTodos);
+};
+
 // event listeners
 btnMenu.forEach((btn) => {
   btn.addEventListener('click', () => {
@@ -111,7 +126,7 @@ btnAddTodos.addEventListener('click', hideTodoMenuBtn);
 btnConfirmNewTodo.addEventListener('click', () => {
   addNewTodo();
   // removeTodos();
-  // renderTodos();
+  renderTodoList();
   hideTodoMenuBtn();
   formInputTodo.reset();
 });

@@ -1,3 +1,3 @@
-const myProjects = [];
+const projectsArray = [];
 
-export default myProjects;
+export default projectsArray;

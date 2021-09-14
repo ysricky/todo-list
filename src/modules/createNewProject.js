@@ -1,5 +1,3 @@
-import { toDate, isToday, isThisWeek } from 'date-fns';
-
 class Project {
   constructor(name) {
     this.name = name;

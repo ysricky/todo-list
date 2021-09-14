@@ -1,7 +1,5 @@
-import { toDate, isToday, isThisWeek } from 'date-fns';
-
 //, description, dueDate, priority, checklist = false
-class Todos {
+class Todo {
   constructor(title) {
     this.title = title;
     // this.description = description;
@@ -27,4 +25,4 @@ class Todos {
   // }
 }
 
-export default Todos;
+export default Todo;

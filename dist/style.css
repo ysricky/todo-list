@@ -98,7 +98,8 @@ section {
   width: 70%;
   display: flex;
   justify-content: space-between;
-  margin-top: 1rem;
+  align-items: center;
+  padding-top: 1rem;
 }
 
 .added-project:hover {
@@ -117,6 +118,10 @@ main {
 
 .addTodos {
   cursor: pointer;
+}
+
+.todo-titles {
+  font-size: 2rem;
 }
 
 .todosDiv {
