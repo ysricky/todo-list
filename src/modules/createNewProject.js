@@ -4,10 +4,6 @@ class Project {
     this.todos = [];
   }
 
-  setName(name) {
-    this.name = name;
-  }
-
   getName() {
     return this.name;
   }
