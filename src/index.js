@@ -1,6 +1,6 @@
 import {
   btnAddNewProject,
   btnConfirmNewProject,
-  btnAddTodos,
+  btnAddNewTodo,
   btnConfirmNewTodo,
 } from './modules/displayController';

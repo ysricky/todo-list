@@ -1,3 +1,6 @@
+import projectsArray from './storageProvider';
+import { projectInputField } from './displayController';
+
 class Project {
   constructor(name) {
     this.name = name;
@@ -6,6 +9,10 @@ class Project {
 
   getName() {
     return this.name;
+  }
+
+  getTodos() {
+    return this.todos;
   }
 
   addTodo(todo) {
@@ -17,4 +24,9 @@ class Project {
   }
 }
 
-export default Project;
+const addNewProject = () => {
+  const newProject = new Project(projectInputField.value);
+  projectsArray.push(newProject);
+};
+
+export default addNewProject;
