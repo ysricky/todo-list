@@ -50,7 +50,7 @@ header {
 
 .close-menu-btn {
   padding-bottom: 1rem;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid var(--tertiary);
 }
 
 .logo {
@@ -65,6 +65,18 @@ section {
   background-color: var(--secondary);
   padding: 1rem;
   z-index: 1;
+}
+
+.today,
+.week {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 2rem;
+}
+
+.project-header {
+  padding-top: 1rem;
+  border-top: 1px solid var(--tertiary);
 }
 
 .btn-new-project {
@@ -83,17 +95,16 @@ section {
 .form-new-project {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding-bottom: 5rem;
+  background-color: var(--primary);
+  border-radius: 15px;
 }
 
-.confirm-project {
-  display: flex;
-  justify-content: space-between;
-  padding: 1rem;
-}
-
-.confirm-project,
-.confirm-todo {
-  cursor: pointer;
+.project-text-input {
+  width: 60%;
 }
 
 .added-project {
@@ -134,16 +145,27 @@ label {
   margin-top: 1rem;
 }
 
-.todos-input {
+.form-new-todo {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
+  padding-bottom: 3rem;
+  background-color: var(--secondary);
+  margin: 1rem;
+  padding-bottom: 5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 10px;
 }
 
 .project-title {
   font-size: 2rem;
   text-transform: uppercase;
+  background-color: var(--primary);
+  border-radius: 25px;
+  padding: 1rem 5rem;
 }
 
 .todos-div {
@@ -166,7 +188,6 @@ label {
   position: relative;
   font-size: 1.8rem;
   word-wrap: break-word;
-  overflow: auto;
 }
 
 .todo-functions {
@@ -180,6 +201,30 @@ label {
 
 .todo-functions > i {
   cursor: pointer;
+}
+
+.submit-project {
+  position: absolute;
+  left: 20%;
+  bottom: 1rem;
+}
+
+.submit-todo {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+}
+
+.cancel-new-project {
+  position: absolute;
+  right: 20%;
+  bottom: 1rem;
+}
+
+.cancel-new-todo {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
 }
 
 footer {
@@ -245,9 +290,10 @@ a {
   section {
     grid-area: unset;
     position: absolute;
+    width: 250px;
     top: 0;
     bottom: 0;
-    right: 30%;
+    /* right: 500px; */
     left: 0;
     transform: translateX(-100%);
     opacity: 0;
