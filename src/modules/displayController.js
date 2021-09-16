@@ -13,8 +13,8 @@ const btnAddNewProject = document.querySelector('.btn-new-project');
 const btnAddNewTodo = document.querySelector('.btn-new-todo');
 const formNewProject = document.querySelector('.form-new-project');
 const formNewTodo = document.querySelector('.form-new-todo');
-const btnConfirmNewProject = document.querySelector('.confirm-new-project');
-const btnConfirmNewTodo = document.querySelector('.confirm-new-todo');
+const btnCancelNewProject = document.querySelector('.cancel-new-project');
+const btnCancelNewTodo = document.querySelector('.cancel-new-todo');
 const projectInputField = document.querySelector('.project-text-input');
 const todoTitle = document.querySelector('#todo-title');
 const dueDate = document.querySelector('#due-date');
@@ -46,7 +46,7 @@ const renderProjects = () => {
     const newProjectDiv = document.createElement('div');
     newProjectDiv.classList.add('added-project');
     newProjectDiv.dataset.projectId = `${projectIndex}`;
-    newProjectDiv.innerHTML = `<i class="fas fa-tasks"></i><div>${project.getName()}</div><i class="fas fa-times-circle"></i>`;
+    newProjectDiv.innerHTML = `<i class="fas fa-tasks"></i><div>${project.getName()}</div><i class="fas fa-times-circle btn-del-project"></i>`;
     newProjectDiv.addEventListener('click', () => {
       renderProjectTitle(project);
       renderTodoList();
@@ -54,9 +54,27 @@ const renderProjects = () => {
     projectsDiv.append(newProjectDiv);
     projectIndex++;
   });
+  // if (projectsArray.length > 0) {
   renderProjectTitle(projectsArray[projectsArray.length - 1]); //automatically render project title after create new project
-  console.log(projectsArray);
+  // } else {
+  //   projectTitle.innerHTML = `<i class="far fa-hand-point-left"></i> add project`;
+  // }
 };
+
+// const delProjectHandler = () => {
+//   const btnDelProject = document.querySelectorAll('.btn-del-project');
+//   btnDelProject.forEach((btn) => {
+//     console.log(projectsArray);
+//     btn.addEventListener('click', () => {
+//       projectsArray.splice(
+//         parseInt(btn.parentElement.getAttribute('data-project-id')),
+//         1
+//       );
+//       clearDisplay(projectsDiv);
+//       renderProjects();
+//     });
+//   });
+// };
 
 const renderProjectTitle = (project) => {
   clearDisplay(todosDiv);
@@ -77,7 +95,6 @@ const renderTodoList = () => {
                             <p>Description: ${todo.getDescription()}</p>
                             <div class="todo-functions"><i class="fas fa-edit"></i>
                             <i class="fas fa-trash"></i></div>`;
-        // todoDiv.textContent = todo.getTitle();
         todosDiv.append(todoDiv);
       });
     }
@@ -95,19 +112,26 @@ btnAddNewProject.addEventListener('click', () => {
   hideMenuButton(btnAddNewProject, formNewProject);
 });
 
-btnConfirmNewProject.addEventListener('click', () => {
+formNewProject.addEventListener('submit', (e) => {
+  e.preventDefault();
   addNewProject();
   clearDisplay(projectsDiv);
   renderProjects();
+  // delProjectHandler();
   hideMenuButton(btnAddNewProject, formNewProject);
   clearInputs();
+});
+
+btnCancelNewProject.addEventListener('click', () => {
+  hideMenuButton(btnAddNewProject, formNewProject);
 });
 
 btnAddNewTodo.addEventListener('click', () => {
   hideMenuButton(btnAddNewTodo, formNewTodo);
 });
 
-btnConfirmNewTodo.addEventListener('click', () => {
+formNewTodo.addEventListener('submit', (e) => {
+  e.preventDefault();
   addNewTodo();
   clearDisplay(todosDiv);
   renderTodoList();
@@ -115,11 +139,15 @@ btnConfirmNewTodo.addEventListener('click', () => {
   clearInputs();
 });
 
+btnCancelNewTodo.addEventListener('click', () => {
+  hideMenuButton(btnAddNewTodo, formNewTodo);
+});
+
 export {
   btnAddNewProject,
-  btnConfirmNewProject,
+  formNewProject,
   btnAddNewTodo,
-  btnConfirmNewTodo,
+  formNewTodo,
   projectInputField,
   todoTitle,
   dueDate,
