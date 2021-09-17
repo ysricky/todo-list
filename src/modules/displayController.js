@@ -44,21 +44,22 @@ const renderProjects = () => {
   let projectIndex = 0;
   projectsArray.forEach((project) => {
     const newProjectDiv = document.createElement('div');
+    const addedProjectWrapper = document.createElement('div');
+    const btnDelProject = document.createElement('span');
     newProjectDiv.classList.add('added-project');
+    addedProjectWrapper.classList.add('added-project-wrapper');
     newProjectDiv.dataset.projectId = `${projectIndex}`;
-    newProjectDiv.innerHTML = `<i class="fas fa-tasks"></i><div>${project.getName()}</div><i class="fas fa-times-circle btn-del-project"></i>`;
-    newProjectDiv.addEventListener('click', () => {
+    addedProjectWrapper.innerHTML = `<i class="fas fa-tasks"></i><div>${project.getName()}</div>`;
+    btnDelProject.innerHTML = `<i class="fas fa-times-circle btn-del-project"></i>`;
+    addedProjectWrapper.addEventListener('click', () => {
       renderProjectTitle(project);
       renderTodoList();
     });
+    newProjectDiv.append(addedProjectWrapper, btnDelProject);
     projectsDiv.append(newProjectDiv);
     projectIndex++;
   });
-  // if (projectsArray.length > 0) {
   renderProjectTitle(projectsArray[projectsArray.length - 1]); //automatically render project title after create new project
-  // } else {
-  //   projectTitle.innerHTML = `<i class="far fa-hand-point-left"></i> add project`;
-  // }
 };
 
 // const delProjectHandler = () => {
