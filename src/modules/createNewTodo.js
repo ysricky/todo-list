@@ -1,4 +1,4 @@
-import projectsArray from './storageProvider';
+import { projectsArray } from './storageProvider';
 import {
   todoTitle,
   dueDate,
@@ -47,4 +47,4 @@ const addNewTodo = () => {
   });
 };
 
-export default addNewTodo;
+export { Todo, addNewTodo };

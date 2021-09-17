@@ -1,7 +1,7 @@
-import projectsArray from './storageProvider';
-import addNewProject from './createNewProject';
-import addNewTodo from './createNewTodo';
-import { add, isToday, isThisWeek } from 'date-fns';
+import { projectsArray, saveToLocalStorage } from './storageProvider';
+import { addNewProject } from './createNewProject';
+import { addNewTodo } from './createNewTodo';
+import { add, isToday, isThisWeek, parse } from 'date-fns';
 
 const section = document.querySelector('section');
 const btnMenu = document.querySelectorAll('span');
@@ -36,52 +36,75 @@ const clearDisplay = (e) => {
 };
 
 const hideMenuButton = (e1, e2) => {
+  // harus di edit (bikin fungsi terpisah untuk masing-masing element yang mau di-hide)
   e1.classList.toggle('hide');
   e2.classList.toggle('hide');
 };
 
-const renderProjects = () => {
-  let projectIndex = 0;
-  projectsArray.forEach((project) => {
-    const newProjectDiv = document.createElement('div');
-    const addedProjectWrapper = document.createElement('div');
-    const btnDelProject = document.createElement('span');
-    newProjectDiv.classList.add('added-project');
-    addedProjectWrapper.classList.add('added-project-wrapper');
-    newProjectDiv.dataset.projectId = `${projectIndex}`;
-    addedProjectWrapper.innerHTML = `<i class="fas fa-tasks"></i><div>${project.getName()}</div>`;
-    btnDelProject.innerHTML = `<i class="fas fa-times-circle btn-del-project"></i>`;
-    addedProjectWrapper.addEventListener('click', () => {
-      renderProjectTitle(project);
-      renderTodoList();
-    });
-    newProjectDiv.append(addedProjectWrapper, btnDelProject);
-    projectsDiv.append(newProjectDiv);
-    projectIndex++;
-  });
-  renderProjectTitle(projectsArray[projectsArray.length - 1]); //automatically render project title after create new project
+const renderProjects = (projObj) => {
+  const newProjectDiv = document.createElement('div');
+  const addedProjectWrapper = document.createElement('div');
+  const btnDelProject = document.createElement('span');
+  newProjectDiv.classList.add('added-project');
+  addedProjectWrapper.classList.add('added-project-wrapper');
+  addedProjectWrapper.innerHTML = `<i class="fas fa-tasks"></i><div>${projObj.getName()}</div>`;
+  btnDelProject.innerHTML = `<i class="fas fa-times-circle btn-del-project"></i>`;
+  newProjectDiv.append(addedProjectWrapper, btnDelProject);
+  projectsDiv.append(newProjectDiv);
+  deleteProject();
+  updateProjectIndex();
 };
 
-// const delProjectHandler = () => {
-//   const btnDelProject = document.querySelectorAll('.btn-del-project');
-//   btnDelProject.forEach((btn) => {
-//     console.log(projectsArray);
-//     btn.addEventListener('click', () => {
-//       projectsArray.splice(
-//         parseInt(btn.parentElement.getAttribute('data-project-id')),
-//         1
-//       );
-//       clearDisplay(projectsDiv);
-//       renderProjects();
-//     });
-//   });
-// };
+const selectActiveProject = () => {
+  const addedProjectWrappers = document.querySelectorAll(
+    '.added-project-wrapper'
+  );
+  addedProjectWrappers.forEach((project) => {
+    const projectName = project.querySelector('div').textContent;
+    project.addEventListener('click', () => {
+      clearDisplay(todosDiv);
+      activeProject = projectName;
+      projectTitle.textContent = activeProject;
+      section.classList.toggle('slide');
+      checkIfProjectExist();
+      renderTodoList();
+    });
+  });
+};
 
-const renderProjectTitle = (project) => {
-  clearDisplay(todosDiv);
-  projectTitle.textContent = `${project.getName()}:`;
-  activeProject = project.getName();
-  section.classList.toggle('slide');
+const updateProjectIndex = () => {
+  let projectIndex = 0;
+  const projects = document.querySelectorAll('.added-project');
+  projects.forEach((project) => {
+    project.setAttribute('data-project', `${projectIndex}`);
+    projectIndex++;
+  });
+};
+
+const projectDataVal = (button) => {
+  return button.parentElement.parentElement.getAttribute('data-project');
+};
+
+const deleteProject = () => {
+  const btnDelProject = document.querySelectorAll('.btn-del-project');
+  btnDelProject.forEach((button) => {
+    if (!projectDataVal(button)) {
+      button.addEventListener('click', () => {
+        const projectId = projectDataVal(button);
+        projectsArray.splice(projectId, 1);
+        button.parentElement.parentElement.remove();
+        updateProjectIndex();
+        saveToLocalStorage();
+        projectTitle.innerHTML = `<i class="far fa-hand-point-left"></i> choose project`;
+        clearDisplay(todosDiv);
+        activeProject = '';
+        // selectActiveProject();
+        checkIfProjectExist();
+      });
+    } else {
+      return;
+    }
+  });
 };
 
 const renderTodoList = () => {
@@ -116,9 +139,9 @@ btnAddNewProject.addEventListener('click', () => {
 formNewProject.addEventListener('submit', (e) => {
   e.preventDefault();
   addNewProject();
+  saveToLocalStorage();
   clearDisplay(projectsDiv);
-  renderProjects();
-  // delProjectHandler();
+  displayProject();
   hideMenuButton(btnAddNewProject, formNewProject);
   clearInputs();
 });
@@ -134,6 +157,7 @@ btnAddNewTodo.addEventListener('click', () => {
 formNewTodo.addEventListener('submit', (e) => {
   e.preventDefault();
   addNewTodo();
+  saveToLocalStorage();
   clearDisplay(todosDiv);
   renderTodoList();
   hideMenuButton(btnAddNewTodo, formNewTodo);
@@ -143,6 +167,22 @@ formNewTodo.addEventListener('submit', (e) => {
 btnCancelNewTodo.addEventListener('click', () => {
   hideMenuButton(btnAddNewTodo, formNewTodo);
 });
+
+const displayProject = () => {
+  projectsArray.forEach((projObj) => {
+    renderProjects(projObj);
+  });
+  checkIfProjectExist();
+  selectActiveProject();
+};
+
+const checkIfProjectExist = () => {
+  if (activeProject === '') {
+    btnAddNewTodo.classList.add('hide');
+  } else {
+    btnAddNewTodo.classList.remove('hide');
+  }
+};
 
 export {
   btnAddNewProject,
@@ -154,5 +194,6 @@ export {
   dueDate,
   priority,
   description,
+  displayProject,
   activeProject,
 };

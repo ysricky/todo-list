@@ -127,8 +127,10 @@ section {
 }
 
 .added-project-wrapper {
+  height: 3rem;
   width: 80%;
   display: flex;
+  align-items: center;
 }
 
 .added-project-wrapper > i {
@@ -252,6 +254,10 @@ a {
 
 .hide {
   display: none;
+}
+
+textarea {
+  resize: none;
 }
 
 /* media queries */

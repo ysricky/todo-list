@@ -4,4 +4,7 @@ import {
   formNewProject,
   btnAddNewTodo,
   formNewTodo,
+  displayProject,
 } from './modules/displayController';
+
+displayProject();

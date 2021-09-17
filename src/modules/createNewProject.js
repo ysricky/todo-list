@@ -1,4 +1,4 @@
-import projectsArray from './storageProvider';
+import { projectsArray } from './storageProvider';
 import { projectInputField } from './displayController';
 
 class Project {
@@ -29,4 +29,4 @@ const addNewProject = () => {
   projectsArray.push(newProject);
 };
 
-export default addNewProject;
+export { Project, addNewProject };
