@@ -31,9 +31,9 @@ const editDescription = document.querySelector('#edit-description');
 const modalDiv = document.querySelector('.modal-edit-todo');
 const btnCancelEdit = document.querySelector('.cancel-edit-todo');
 
-// placeholder for current active/selected project
+// placeholder for current active/selected project or todos
 let activeProject = '';
-
+let activeTodos = '';
 // element utilities
 const clearInputs = () => {
   formInputs.forEach((form) => {
@@ -166,6 +166,7 @@ const editTodo = () => {
       button.addEventListener('click', () => {
         modalDiv.classList.toggle('hide');
         const todoId = todoDataVal(button);
+        activeTodos = todoDataVal(button);
         projectsArray.forEach((project) => {
           if (project.getName() === activeProject) {
             editTodoTitle.value = project.getTodos()[todoId].getTitle();
@@ -198,6 +199,19 @@ const renderTodoList = () => {
       });
     }
   });
+};
+
+const editTodosData = () => {
+  projectsArray.forEach((project) => {
+    if (project.getName() === activeProject) {
+      const selectedTodosObject = project.getTodos()[parseInt(activeTodos)];
+      selectedTodosObject.setTitle(editTodoTitle.value);
+      selectedTodosObject.setDueDate(editDueDate.value);
+      selectedTodosObject.setPriority(editPriority.value);
+      selectedTodosObject.setDescription(editDescription.value);
+    }
+  });
+  modalDiv.classList.toggle('hide');
 };
 
 // event listeners
@@ -238,6 +252,15 @@ formNewTodo.addEventListener('submit', (e) => {
   renderTodoList();
   hideMenuButton(btnAddNewTodo, formNewTodo);
   clearInputs();
+});
+
+formEditTodo.addEventListener('submit', (e) => {
+  e.preventDefault();
+  editTodosData();
+  clearDisplay(todosDiv);
+  renderTodoList();
+  clearInputs();
+  saveToLocalStorage();
 });
 
 btnCancelNewTodo.addEventListener('click', () => {
