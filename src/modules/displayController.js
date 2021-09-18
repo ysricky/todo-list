@@ -81,6 +81,15 @@ const updateProjectIndex = () => {
   });
 };
 
+const updateTodoIndex = () => {
+  let todoIndex = 0;
+  const todos = document.querySelectorAll('.todo');
+  todos.forEach((todo) => {
+    todo.setAttribute('data-todo', `${todoIndex}`);
+    todoIndex++;
+  });
+};
+
 const projectDataVal = (button) => {
   return button.parentElement.parentElement.getAttribute('data-project');
 };
@@ -107,6 +116,33 @@ const deleteProject = () => {
   });
 };
 
+const todoDataVal = (button) => {
+  return button.parentElement.parentElement.getAttribute('data-todo');
+};
+
+const deleteTodo = () => {
+  const btnDelTodo = document.querySelectorAll('.btn-del-todo');
+  btnDelTodo.forEach((button) => {
+    if (!todoDataVal(button)) {
+      button.addEventListener('click', () => {
+        const todoId = todoDataVal(button);
+        projectsArray.forEach((project) => {
+          if (project.getName() === activeProject) {
+            project.getTodos().splice(todoId, 1);
+            button.parentElement.parentElement.remove();
+            updateProjectIndex();
+            saveToLocalStorage();
+          } else {
+            return;
+          }
+        });
+      });
+    } else {
+      return;
+    }
+  });
+};
+
 const renderTodoList = () => {
   projectsArray.forEach((project) => {
     if (project.getName() === activeProject) {
@@ -117,9 +153,11 @@ const renderTodoList = () => {
                             <p>Due date: ${todo.getDueDate()}</p>
                             <p>Priority: ${todo.getPriority()}</p>
                             <p>Description: ${todo.getDescription()}</p>
-                            <div class="todo-functions"><i class="fas fa-edit"></i>
-                            <i class="fas fa-trash"></i></div>`;
+                            <div class="todo-functions"><i class="fas fa-edit btn-edit-todo"></i>
+                            <i class="fas fa-trash btn-del-todo"></i></div>`;
         todosDiv.append(todoDiv);
+        deleteTodo();
+        updateTodoIndex();
       });
     }
   });
