@@ -99,16 +99,20 @@ const deleteProject = () => {
   btnDelProject.forEach((button) => {
     if (!projectDataVal(button)) {
       button.addEventListener('click', () => {
-        const projectId = projectDataVal(button);
-        projectsArray.splice(projectId, 1);
-        button.parentElement.parentElement.remove();
-        updateProjectIndex();
-        saveToLocalStorage();
-        projectTitle.innerHTML = `<i class="far fa-hand-point-left"></i> choose project`;
-        clearDisplay(todosDiv);
-        activeProject = '';
-        // selectActiveProject();
-        checkIfProjectExist();
+        if (
+          confirm("Do you want to delete this project and all of it's tasks?")
+        ) {
+          const projectId = projectDataVal(button);
+          projectsArray.splice(projectId, 1);
+          button.parentElement.parentElement.remove();
+          updateProjectIndex();
+          saveToLocalStorage();
+          projectTitle.innerHTML = `<i class="far fa-hand-point-left"></i> choose project`;
+          clearDisplay(todosDiv);
+          activeProject = '';
+          // selectActiveProject();
+          checkIfProjectExist();
+        }
       });
     } else {
       return;
@@ -125,17 +129,19 @@ const deleteTodo = () => {
   btnDelTodo.forEach((button) => {
     if (!todoDataVal(button)) {
       button.addEventListener('click', () => {
-        const todoId = todoDataVal(button);
-        projectsArray.forEach((project) => {
-          if (project.getName() === activeProject) {
-            project.getTodos().splice(todoId, 1);
-            button.parentElement.parentElement.remove();
-            updateProjectIndex();
-            saveToLocalStorage();
-          } else {
-            return;
-          }
-        });
+        if (confirm('Do you want to delete this task?')) {
+          const todoId = todoDataVal(button);
+          projectsArray.forEach((project) => {
+            if (project.getName() === activeProject) {
+              project.getTodos().splice(todoId, 1);
+              button.parentElement.parentElement.remove();
+              updateProjectIndex();
+              saveToLocalStorage();
+            } else {
+              return;
+            }
+          });
+        }
       });
     } else {
       return;
