@@ -13,13 +13,20 @@ const btnAddNewProject = document.querySelector('.btn-new-project');
 const btnAddNewTodo = document.querySelector('.btn-new-todo');
 const formNewProject = document.querySelector('.form-new-project');
 const formNewTodo = document.querySelector('.form-new-todo');
+const formEditTodo = document.querySelector('.form-edit-todo');
 const btnCancelNewProject = document.querySelector('.cancel-new-project');
 const btnCancelNewTodo = document.querySelector('.cancel-new-todo');
 const projectInputField = document.querySelector('.project-text-input');
+
 const todoTitle = document.querySelector('#todo-title');
 const dueDate = document.querySelector('#due-date');
 const priority = document.querySelector('#priority');
 const description = document.querySelector('#description');
+
+const editTodoTitle = document.querySelector('#edit-todo-title');
+const editDueDate = document.querySelector('#edit-due-date');
+const editPriority = document.querySelector('#edit-priority');
+const editDescription = document.querySelector('#edit-description');
 
 const modalDiv = document.querySelector('.modal-edit-todo');
 const btnCancelEdit = document.querySelector('.cancel-edit-todo');
@@ -158,6 +165,15 @@ const editTodo = () => {
     if (!todoDataVal(button)) {
       button.addEventListener('click', () => {
         modalDiv.classList.toggle('hide');
+        const todoId = todoDataVal(button);
+        projectsArray.forEach((project) => {
+          if (project.getName() === activeProject) {
+            editTodoTitle.value = project.getTodos()[todoId].getTitle();
+            editDueDate.value = project.getTodos()[todoId].getDueDate();
+            editPriority.value = project.getTodos()[todoId].getPriority();
+            editDescription.value = project.getTodos()[todoId].getDescription();
+          }
+        });
       });
     }
   });
@@ -206,6 +222,7 @@ formNewProject.addEventListener('submit', (e) => {
 });
 
 btnCancelNewProject.addEventListener('click', () => {
+  clearInputs();
   hideMenuButton(btnAddNewProject, formNewProject);
 });
 
@@ -224,10 +241,12 @@ formNewTodo.addEventListener('submit', (e) => {
 });
 
 btnCancelNewTodo.addEventListener('click', () => {
+  clearInputs();
   hideMenuButton(btnAddNewTodo, formNewTodo);
 });
 
 btnCancelEdit.addEventListener('click', () => {
+  clearInputs();
   modalDiv.classList.toggle('hide');
 });
 

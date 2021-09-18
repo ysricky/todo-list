@@ -16,6 +16,22 @@ class Todo {
     this.description = description;
   }
 
+  setTitle(newTitle) {
+    this.title = newTitle;
+  }
+
+  setDueDate(newDueDate) {
+    this.dueDate = newDueDate;
+  }
+
+  setPriority(newPriority) {
+    this.priority = newPriority;
+  }
+
+  setDescription(newDescription) {
+    this.description = newDescription;
+  }
+
   getTitle() {
     return this.title;
   }
