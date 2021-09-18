@@ -83,6 +83,24 @@
             </p>
         </footer>
         <!-- end of footer -->
+        <div class="modal-edit-todo hide">
+            <form class="form-edit-todo">
+                <label for="edit-todo-title">Title:</label>
+                <input type="text" id="edit-todo-title" maxlength="20" size="16" required>
+                <label for="edit-due-date">Due date:</label>
+                <input type="date" id="edit-due-date" required>
+                <label for="edit-description">Description:</label>
+                <textarea id="edit-description" rows="3" cols="20" maxlength="50"></textarea>
+                <label for="edit-priority">Priority:</label>
+                <select id="edit-priority">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+                <input type="submit" value="Confirm" class="submit-edit-todo">
+                <button class="cancel-edit-todo">Cancel</button>
+            </form>
+        </div>
     </div>
 </body>
 

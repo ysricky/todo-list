@@ -21,6 +21,9 @@ const dueDate = document.querySelector('#due-date');
 const priority = document.querySelector('#priority');
 const description = document.querySelector('#description');
 
+const modalDiv = document.querySelector('.modal-edit-todo');
+const btnCancelEdit = document.querySelector('.cancel-edit-todo');
+
 // placeholder for current active/selected project
 let activeProject = '';
 
@@ -149,6 +152,17 @@ const deleteTodo = () => {
   });
 };
 
+const editTodo = () => {
+  const btnEditTodo = document.querySelectorAll('.btn-edit-todo');
+  btnEditTodo.forEach((button) => {
+    if (!todoDataVal(button)) {
+      button.addEventListener('click', () => {
+        modalDiv.classList.toggle('hide');
+      });
+    }
+  });
+};
+
 const renderTodoList = () => {
   projectsArray.forEach((project) => {
     if (project.getName() === activeProject) {
@@ -162,6 +176,7 @@ const renderTodoList = () => {
                             <div class="todo-functions"><i class="fas fa-edit btn-edit-todo"></i>
                             <i class="fas fa-trash btn-del-todo"></i></div>`;
         todosDiv.append(todoDiv);
+        editTodo();
         deleteTodo();
         updateTodoIndex();
       });
@@ -210,6 +225,10 @@ formNewTodo.addEventListener('submit', (e) => {
 
 btnCancelNewTodo.addEventListener('click', () => {
   hideMenuButton(btnAddNewTodo, formNewTodo);
+});
+
+btnCancelEdit.addEventListener('click', () => {
+  modalDiv.classList.toggle('hide');
 });
 
 const displayProject = () => {
