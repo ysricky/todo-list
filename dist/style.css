@@ -74,6 +74,11 @@ section {
   margin-left: 2rem;
 }
 
+.is-today,
+.is-this-week {
+  cursor: pointer;
+}
+
 .project-header {
   padding-top: 1rem;
   border-top: 1px solid var(--tertiary);
