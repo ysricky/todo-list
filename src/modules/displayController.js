@@ -1,7 +1,7 @@
 import { projectsArray, saveToLocalStorage } from './storageProvider';
 import { addNewProject } from './createNewProject';
 import { addNewTodo } from './createNewTodo';
-import { add, isToday, isThisWeek, parse } from 'date-fns';
+import { isToday, isThisWeek, parseISO } from 'date-fns';
 
 const section = document.querySelector('section');
 const btnMenu = document.querySelectorAll('span');
@@ -30,6 +30,9 @@ const editDescription = document.querySelector('#edit-description');
 
 const modalDiv = document.querySelector('.modal-edit-todo');
 const btnCancelEdit = document.querySelector('.cancel-edit-todo');
+
+const isTodayButton = document.querySelector('.is-today');
+const isThisWeekButton = document.querySelector('.is-this-week');
 
 // placeholder for current active/selected project or todos
 let activeProject = '';
@@ -201,6 +204,17 @@ const renderTodoList = () => {
   });
 };
 
+const renderCategorizedTodoList = (todo, project) => {
+  const todoDiv = document.createElement('div');
+  todoDiv.classList.add('todo');
+  todoDiv.innerHTML = `<h2>${todo.getTitle()}</h2>
+                            <p>Due date: ${todo.getDueDate()}</p>
+                            <p>Priority: ${todo.getPriority()}</p>
+                            <p>Description: ${todo.getDescription()}</p>
+                            <div>On project: ${project.getName()}</div>`;
+  todosDiv.append(todoDiv);
+};
+
 const editTodosData = () => {
   projectsArray.forEach((project) => {
     if (project.getName() === activeProject) {
@@ -288,6 +302,38 @@ const checkIfProjectExist = () => {
     btnAddNewTodo.classList.remove('hide');
   }
 };
+
+//date-fns function isToday isThisWeek
+
+isTodayButton.addEventListener('click', () => {
+  activeProject = '';
+  checkIfProjectExist();
+  clearDisplay(todosDiv);
+  projectTitle.innerHTML = 'What todo today?';
+  section.classList.toggle('slide');
+  projectsArray.forEach((project) => {
+    project.getTodos().forEach((todo) => {
+      if (isToday(parseISO(todo.getDueDate()))) {
+        renderCategorizedTodoList(todo, project);
+      }
+    });
+  });
+});
+
+isThisWeekButton.addEventListener('click', () => {
+  activeProject = '';
+  checkIfProjectExist();
+  clearDisplay(todosDiv);
+  projectTitle.innerHTML = 'What todo this week?';
+  section.classList.toggle('slide');
+  projectsArray.forEach((project) => {
+    project.getTodos().forEach((todo) => {
+      if (isThisWeek(parseISO(todo.getDueDate()))) {
+        renderCategorizedTodoList(todo, project);
+      }
+    });
+  });
+});
 
 export {
   btnAddNewProject,
