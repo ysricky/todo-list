@@ -1,9 +1,3 @@
-import {
-  btnAddNewProject,
-  formNewProject,
-  btnAddNewTodo,
-  formNewTodo,
-  displayProject,
-} from './modules/displayController';
+import { displayProject } from './modules/displayController';
 
 displayProject();
