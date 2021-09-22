@@ -6,6 +6,7 @@ import { isToday, isThisWeek, parseISO } from 'date-fns';
 const section = document.querySelector('section');
 const btnMenu = document.querySelectorAll('span');
 const formInputs = document.querySelectorAll('form');
+
 const projectTitle = document.querySelector('.project-title');
 const projectsDiv = document.querySelector('.projects-div');
 const todosDiv = document.querySelector('.todos-div');
