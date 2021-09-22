@@ -5,7 +5,8 @@ import { Todo } from './createNewTodo';
 const storedArray = () => JSON.parse(localStorage.getItem('array'));
 let projectsArray = (storedArray() || []).map((obj) => {
   const newObjectFromStorage = new Project(obj.name);
-  obj.todos.forEach((todoFromObj) => {
+  const projectTodos = obj.todos;
+  projectTodos.forEach((todoFromObj) => {
     const newTodoFromObj = new Todo(
       todoFromObj.title,
       todoFromObj.dueDate,
